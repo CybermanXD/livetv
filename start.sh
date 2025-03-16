@@ -1,14 +1,15 @@
 #!/bin/bash
 chmod +x ./jiotv_go-linux-amd64
-
-# Install socat
 apt-get update && apt-get install -y socat
 
-# Start JioTV Go in the background
+export JIOTV_DRM=true
+
 ./jiotv_go-linux-amd64 start &
 
-# Wait a bit to make sure the app boots before socat starts forwarding
-sleep 3
+sleep 5
 
-# Forward Railway's external $PORT to the app’s internal port
-socat TCP-LISTEN:${PORT},fork,reuseaddr TCP:127.0.0.1:5001
+while true; do
+    socat TCP-LISTEN:${PORT},fork,reuseaddr TCP:127.0.0.1:5001
+    echo "socat crashed, retrying in 2s..."
+    sleep 2
+done
