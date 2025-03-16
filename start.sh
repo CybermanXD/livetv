@@ -1,4 +1,4 @@
 #!/bin/bash
-chmod +x ./jiotv_go-linux-arm
-./jiotv_go-linux-arm
+chmod +x ./jiotv_go-linux-amd64
+./jiotv_go-linux-amd64
  
